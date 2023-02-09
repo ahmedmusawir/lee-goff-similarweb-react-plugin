@@ -7,3 +7,30 @@
 //   background: red !important;
 //   border: 1rem dotted dodgerblue;
 // }
+
+.App {
+  .input-box {
+    display: flex;
+    flex-direction: column;
+
+    input {
+      margin-top: 1rem;
+      width: 350px;
+    }
+
+    button {
+      margin-top: 1rem;
+      padding: 1rem;
+      width: 350px;
+    }
+  }
+
+  .display-box {
+    margin-top: 3rem;
+    .success-message {
+      margin-top: 2rem;
+      color: limegreen;
+      font-size: 1rem;
+    }
+  }
+}

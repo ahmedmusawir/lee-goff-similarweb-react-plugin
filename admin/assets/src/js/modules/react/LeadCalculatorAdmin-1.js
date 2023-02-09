@@ -1,10 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
-import $ from 'jquery';
+import React, { useState, useRef } from 'react';
 import moment from 'moment';
 import { Audio } from 'react-loader-spinner';
 import localData from './data';
 
-function LeadCalculator() {
+function LeadCalculatorAdmin() {
   const [domainName, setDomainName] = useState('');
   const [lastDateListed, setLastDateListed] = useState('');
   const [lastVisitNumberListed, setLastVisitNumberListed] = useState('');
@@ -17,34 +16,6 @@ function LeadCalculator() {
   const [error, setError] = useState('');
 
   const textInput = useRef();
-  const [rapidApiKey, setRapidApiKey] = useState('');
-  const [emailApiKey, setEmailApiKey] = useState('');
-  const ajaxGetFunction = 'get_api_keys_ajax';
-
-  useEffect(() => {
-    //GETTING THE API KEYS AT PAGE LOAD
-    const getKeys = () => {
-      $.ajax({
-        url: leeFrontData.ajax_url,
-        type: 'get',
-        data: {
-          action: ajaxGetFunction,
-        },
-      })
-        .done((res) => {
-          console.log(res);
-          setRapidApiKey(res.data.rapidApiKey);
-          setEmailApiKey(res.data.emailApiKey);
-          console.log('Ajax with WP Ajax PHP function Success!');
-        })
-        .fail((res) => {
-          console.log('Ajax Failed');
-          console.log(res);
-        });
-    };
-
-    getKeys();
-  }, []);
 
   const calculatePercentage = (num, percentage) => {
     return Math.ceil((num * percentage) / 100);
@@ -142,12 +113,6 @@ function LeadCalculator() {
     <div className="App">
       <header className="App-header">
         <h1>Lee Goff Lead Calculator</h1>
-        {rapidApiKey && emailApiKey && (
-          <div>
-            <h3>Rapid Api Key: {rapidApiKey}</h3>
-            <h3>Email Api Key: {emailApiKey}</h3>
-          </div>
-        )}
       </header>
       <main className="App-container">
         <h4 style={{ textAlign: 'center' }}>
@@ -243,4 +208,4 @@ function LeadCalculator() {
   );
 }
 
-export default LeadCalculator;
+export default LeadCalculatorAdmin;
