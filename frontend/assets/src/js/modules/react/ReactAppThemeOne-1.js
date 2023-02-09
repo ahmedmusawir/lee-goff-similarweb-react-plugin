@@ -1,13 +1,13 @@
 import React from 'react';
 
-function ReactAppThemeTwo() {
-  const handleClick = () => {
-    console.log('Running React App Theme 2');
-    // alert('Running React App 1');
+function ReactAppThemeOne() {
+  const handleClick = (e) => {
+    console.log('Running React App Theme 1');
+    alert('Running React App 1: [REACT BASED PLUGIN]');
   };
   return (
     <div className="app-content container">
-      <h1 className="jumbotron">React App Theme 2 Works!</h1>
+      <h1 className="jumbotron">Lee Goff Lead Plugin Starts Here!</h1>
       <article>
         <h3>This is coming from OOP PHP theme</h3>
         <p>
@@ -24,4 +24,4 @@ function ReactAppThemeTwo() {
   );
 }
 
-export default ReactAppThemeTwo;
+export default ReactAppThemeOne;

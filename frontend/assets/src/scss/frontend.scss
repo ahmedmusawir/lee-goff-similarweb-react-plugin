@@ -3,12 +3,56 @@
 =============================*/
 @import 'global';
 @import 'custom';
-// body {
-//   display: none;
-// }
 
 #REACT-PLUGIN-APP {
-  height: 400px;
   width: 100%;
-  border: 1rem dotted red;
+
+  .App {
+    border: 1px dotted dodgerblue;
+    .App-header {
+      text-align: center;
+      color: red;
+      margin-top: 1rem;
+    }
+    .App-container {
+      min-height: 500px;
+      background-color: #e1e1ef;
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+      .form-box {
+        display: flex;
+        justify-content: center;
+
+        input {
+          margin-bottom: 0.5rem;
+          padding: 1rem;
+          min-width: 260px;
+        }
+        button {
+          padding: 1rem 3rem;
+          border: 1px solid dodgerblue;
+        }
+      }
+      .display-box {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+
+        .display-box-content {
+          margin: 2rem;
+          padding: 4rem;
+          background-color: white;
+
+          .generated-leads {
+            padding: 1rem 2rem;
+            padding-bottom: 2.5rem;
+            background-color: dodgerblue;
+            color: white;
+            font-weight: 700;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
 }

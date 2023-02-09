@@ -3,7 +3,7 @@
  */
 import ReactDOM from 'react-dom';
 import React from 'react';
-import LeadCalculatorAdmin from './react/LeadCalculatorAdmin';
+import LeadCalculator from './react/LeadCalculator';
 
 class App {
   constructor() {
@@ -11,7 +11,7 @@ class App {
     // LUNCHING REACT APP THEME ONE
     const appThemeOne = document.getElementById('REACT-CONTENT');
     if (appThemeOne) {
-      ReactDOM.render(<LeadCalculatorAdmin />, appThemeOne);
+      ReactDOM.render(<LeadCalculator />, appThemeOne);
     }
   }
 }

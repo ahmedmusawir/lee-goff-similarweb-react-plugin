@@ -91,6 +91,7 @@
     "gulp-streamify": "^1.0.2",
     "gulp-terser": "^2.1.0",
     "idb-keyval": "^5.0.5",
+    "moment": "^2.29.4",
     "popper": "^1.0.1",
     "popper.js": "^1.16.1",
     "react": "^16.14.0",
