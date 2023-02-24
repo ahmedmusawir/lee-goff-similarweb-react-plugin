@@ -59,7 +59,7 @@ function styles(done) {
 var jsSRC = 'admin.js';
 
 var jsFolder = 'assets/src/js/';
-var jsWatch = 'assets/src/js/**/*.js';
+var jsWatch = 'assets/src/js/**/*.{js,jsx}';
 var jsDIST = './assets/dist/js/';
 
 var jsFILES = [jsSRC];
@@ -80,7 +80,9 @@ function js(done) {
     return browserify({
       entries: [jsFolder + singleJSFile],
     })
-      .transform(babelify, { presets: ['@babel/preset-env'] })
+      .transform(babelify, {
+        presets: ['@babel/preset-env', '@babel/preset-react'],
+      })
       .bundle()
       .pipe(source(singleJSFile))
       .pipe(rename({ extname: '.min.js' }))

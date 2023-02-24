@@ -1,5 +1,6 @@
 /**
  * PUBLIC MAIN SCRIPT
+ * NOTICE: JSX WILL NOT COMPILE IN WP USING GULP
  */
 import ReactDOM from 'react-dom';
 import React from 'react';

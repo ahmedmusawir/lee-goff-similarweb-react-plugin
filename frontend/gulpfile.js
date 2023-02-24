@@ -83,7 +83,9 @@ function js(done) {
     return browserify({
       entries: [jsFolder + singleJSFile],
     })
-      .transform([babelify, reactify], { presets: ['@babel/preset-env'] })
+      .transform([babelify, reactify], {
+        presets: ['@babel/preset-env', '@babel/preset-react'],
+      })
       .bundle()
       .pipe(source(singleJSFile))
       .pipe(rename({ extname: '.min.js' }))
