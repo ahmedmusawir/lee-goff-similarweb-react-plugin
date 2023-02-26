@@ -2,12 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Audio from 'react-loader-spinner';
 import Modal from 'react-modal';
 import $ from 'jquery';
-import {
-  getRapidKey,
-  getEmailKeys,
-  insertRapidKey,
-  insertEmailKeys,
-} from './utils/ajaxStuff';
 
 const customStyles = {
   content: {
@@ -27,8 +21,6 @@ const customStyles = {
 function LeadCalculatorAdmin() {
   const ajaxGetFunction = 'get_api_keys_ajax';
   const ajaxPostFunction = 'update_api_keys_ajax';
-  const ajaxEmailGetFunction = 'get_email_keys_ajax';
-  const ajaxEmailPostFunction = 'update_email_keys_ajax';
   const pluginImgUrl =
     leeAdminData.plugin_url +
     '/lee-goff-similarweb-react-plugin/admin/assets/imgs';
@@ -36,9 +28,9 @@ function LeadCalculatorAdmin() {
   const [targetEmailAddress, setTargetEmailAddress] = useState('');
   const [emailPublicKey, setEmailPublicKey] = useState('');
   const [emailTemplateKey, setEmailTemplateKey] = useState('');
-  const [emailServiceKey, setEmailServiceKey] = useState('');
+  const [emailServiceId, setEmailServiceId] = useState('');
   const [success, setSuccess] = useState(false);
-  const [successEmail, setSuccessEmail] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
   const [isRapidOpen, setIsRapidOpen] = useState(false);
   const [isServiceIdOpen, setIsServiceIdOpen] = useState(false);
   const [isTemplateIdOpen, setIsTemplateIdOpen] = useState(false);
@@ -77,23 +69,54 @@ function LeadCalculatorAdmin() {
 
   useEffect(() => {
     //GETTING THE API KEYS AT PAGE LOAD
-    getRapidKey(leeAdminData.ajax_url, ajaxGetFunction, setRapidApiKey);
-    //GETTING THE EMAIL KEYS AT PAGE LOAD
-    getEmailKeys(
-      leeAdminData.ajax_url,
-      ajaxEmailGetFunction,
-      setTargetEmailAddress,
-      setEmailPublicKey,
-      setEmailServiceKey,
-      setEmailTemplateKey
-    );
+    const getKeys = () => {
+      $.ajax({
+        url: leeAdminData.ajax_url,
+        type: 'get',
+        data: {
+          action: ajaxGetFunction,
+        },
+      })
+        .done((res) => {
+          console.log(res);
+          setRapidApiKey(res.data.rapidApiKey);
+          console.log('Ajax with WP Ajax PHP function Success!');
+        })
+        .fail((res) => {
+          console.log('Ajax Failed');
+          console.log(res);
+        });
+    };
+
+    getKeys();
   }, []);
 
+  //UPDATING THE API KEYS ON CLICK
+  const insertKeys = () => {
+    $.ajax({
+      url: leeAdminData.ajax_url,
+      type: 'post',
+      data: {
+        action: ajaxPostFunction,
+        rapidApiKey,
+        emailApiKey,
+      },
+    })
+      .done((res) => {
+        console.log(res);
+        setSuccess(true);
+        console.log('Ajax with WP Ajax PHP function Success!');
+      })
+      .fail((res) => {
+        console.log('Ajax Failed');
+        console.log(res);
+      });
+  };
   return (
     <div className="App">
       <section className="input-box">
         <h1 className="text-light">Shortcode:</h1>
-        <h5 className="text-warning mb-4">[traffic_2_lead_calculator]</h5>
+        <h5 className="text-warning mb-3">[traffic_2_lead_calculator]</h5>
       </section>
       <section className="input-box">
         <h1 className="text-light">
@@ -107,9 +130,6 @@ function LeadCalculatorAdmin() {
           </a>
           )
         </h1>
-        <p className="text-info">
-          The data fetching from the API will not work without this key!
-        </p>
         <h6 className="btn btn-sm btn-info" onClick={openRapidModal}>
           Rapid API example
         </h6>
@@ -131,28 +151,18 @@ function LeadCalculatorAdmin() {
         </Modal>
         <input
           type="text"
-          placeholder={'SimilarWeb Api Key'}
+          placeholder={rapidApiKey ? rapidApiKey : 'SimilarWeb Api Key'}
           onChange={(e) => setRapidApiKey(e.target.value)}
         />
 
-        <button
-          className="btn btn-warning btn-md mt-3"
-          onClick={() =>
-            insertRapidKey(
-              leeAdminData.ajax_url,
-              ajaxPostFunction,
-              rapidApiKey,
-              setSuccess
-            )
-          }
-        >
+        <button className="btn btn-warning btn-md mt-3" onClick={insertKeys}>
           Update Api Keys
         </button>
       </section>
       <section className="display-box">
         {success && (
           <aside className="success-message">
-            Api Key Update Successfully!
+            Api Keys Update Successfully!
           </aside>
         )}
       </section>
@@ -169,9 +179,6 @@ function LeadCalculatorAdmin() {
           </a>
           )
         </h1>
-        <p className="text-info">
-          Auto sending emails will not work without any of the following!
-        </p>
         <div className="row">
           <h6
             className="btn btn-sm btn-info mr-2 ml-3"
@@ -238,47 +245,37 @@ function LeadCalculatorAdmin() {
           <img src={pluginImgUrl + '/emailjs-publickey.png'} alt="" />
         </Modal>
         <input
-          type="email"
-          required
-          placeholder={'Target Email Address'}
+          type="text"
+          placeholder={
+            targetEmailAddress ? targetEmailAddress : 'Target Email Address'
+          }
           onChange={(e) => setTargetEmailAddress(e.target.value)}
         />
         <input
           type="text"
-          placeholder={'EmailJs Service ID'}
-          onChange={(e) => setEmailServiceKey(e.target.value)}
+          placeholder={emailServiceId ? emailServiceId : 'EmailJs Service ID'}
+          onChange={(e) => setEmailServiceId(e.target.value)}
         />
         <input
           type="text"
-          placeholder={'EmailJS Template Key'}
+          placeholder={
+            emailTemplateKey ? emailTemplateKey : 'EmailJS Template Key'
+          }
           onChange={(e) => setEmailTemplateKey(e.target.value)}
         />
         <input
           type="text"
-          placeholder={'EmailJS Public Key'}
+          placeholder={emailPublicKey ? emailPublicKey : 'EmailJS Public Key'}
           onChange={(e) => setEmailPublicKey(e.target.value)}
         />
-        <button
-          className="btn btn-warning btn-md mt-3"
-          onClick={() =>
-            insertEmailKeys(
-              leeAdminData.ajax_url,
-              ajaxEmailPostFunction,
-              targetEmailAddress,
-              emailPublicKey,
-              emailTemplateKey,
-              emailServiceKey,
-              setSuccessEmail
-            )
-          }
-        >
-          Update Email Keys
+        <button className="btn btn-warning btn-md mt-3" onClick={insertKeys}>
+          Update Api Keys
         </button>
       </section>
       <section className="display-box">
-        {successEmail && (
+        {success && (
           <aside className="success-message">
-            Email Keys Update Successfully!
+            Api Keys Update Successfully!
           </aside>
         )}
       </section>

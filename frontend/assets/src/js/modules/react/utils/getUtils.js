@@ -1,5 +1,4 @@
 import moment from 'moment';
-import millify from 'millify';
 import emailjs from '@emailjs/browser';
 
 const sendEmail = (data) => {
@@ -12,7 +11,7 @@ const sendEmail = (data) => {
       'service_yfdtacg', // SERVICE ID
       'template_hym4qar', // TEMPLATE ID
       templateParams,
-      'WGdP1_0dhm0s_-PSD' // PUBLIC KEY
+      '08zq9l2uCvoBqlM2p' // PUBLIC KEY
     )
     .then(
       (result) => {
@@ -74,4 +73,16 @@ const getMonthlyChange = (numberData) => {
   };
 };
 
-export { getMonths, getMonthlyChange, sendEmail };
+const validateDomainName = (domainName) => {
+  // Create a regular expression to validate the domain name
+  const dn =
+    /^(([a-zA-Z]{1})|([a-zA-Z]{1}[a-zA-Z]{1})|([a-zA-Z]{1}[0-9]{1})|([0-9]{1}[a-zA-Z]{1})|([a-zA-Z0-9][a-zA-Z0-9\-]{1,61}[a-zA-Z0-9]))\.([a-zA-Z]{2,6}|[a-zA-Z0–9\-]{2,30}\.[a–zA–Z]{2,3})$/;
+
+  if (dn.test(domainName)) {
+    return null;
+  } else {
+    return 'A valid Domain Name or a Number is requied!';
+  }
+};
+
+export { getMonths, getMonthlyChange, sendEmail, validateDomainName };

@@ -53,4 +53,4 @@
   return $module_contents;
  }
 
-add_shortcode('lee_goff_lead_calculator', 'lee_goff_lead_plugin');
+add_shortcode('traffic_2_lead_calculator', 'lee_goff_lead_plugin');

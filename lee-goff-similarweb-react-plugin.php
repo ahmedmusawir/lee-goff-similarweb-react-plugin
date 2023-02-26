@@ -34,5 +34,7 @@ include plugin_dir_path(__FILE__) . 'includes/cyberize-scripts.php';
 // Removing & Replacing Default Welcome Widgets
 include plugin_dir_path(__FILE__) . 'includes/react-app-shortcode.php';
 include plugin_dir_path(__FILE__) . 'includes/custom-options-page.php';
-include plugin_dir_path(__FILE__) . 'includes/update-api-keys-ajax.php';
 include plugin_dir_path(__FILE__) . 'includes/get-api-keys-ajax.php';
+include plugin_dir_path(__FILE__) . 'includes/update-api-keys-ajax.php';
+include plugin_dir_path(__FILE__) . 'includes/get-email-keys-ajax.php';
+include plugin_dir_path(__FILE__) . 'includes/update-email-keys-ajax.php';

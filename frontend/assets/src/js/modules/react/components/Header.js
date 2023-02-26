@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import millify from 'millify';
-import axios from 'axios';
 import Audio from 'react-loader-spinner';
-import { sendEmail } from '../utils/getUtils';
+import { sendEmail, validateDomainName } from '../utils/getUtils';
+import http from '../utils/httpService';
 
 import data from '../data-shopee.json';
 
@@ -19,7 +19,7 @@ const Header = ({
   const [generatedLeadsByUsers, setGeneratedLeadsByUsers] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const validateData = (e) => {
+  const validateData = async (e) => {
     setIsLoading(true);
 
     if (domainName) {
@@ -27,34 +27,42 @@ const Header = ({
       if (isNaN(domainName)) {
         //THIS MAKES API BASED DATA TO SHOW UP
         setIsNumber(false);
-        console.log('Input is text');
+        // console.log('Input is text');
+
+        // VALIDATING DOMAIN NAME STRING
+        const domainVal = validateDomainName(domainName);
+
+        if (domainVal) {
+          return setError(domainVal);
+        }
+
         //MAKING API CALL TO SIMILAR WEB RAPID API
-        // const options = {
-        //   method: 'GET',
-        //   url: 'https://similar-web.p.rapidapi.com/get-analysis',
-        //   params: { domain: domainName },
-        //   headers: {
-        //     'X-RapidAPI-Key': rapidApiKey,
-        //     'X-RapidAPI-Host': 'similar-web.p.rapidapi.com',
-        //   },
-        // };
-        // axios
-        //   .request(options)
-        //   .then(function (response) {
-        //     console.log(response.data);
-        //     setApiData(response.data);
-        //     setIsLoading(false);
-        //     setError('');
-        //   })
-        //   .catch(function (error) {
-        //     console.error(error);
-        //   });
-        setApiData(data);
-        // sendEmail(domainName);
-        // setIsLoading(false);
-        setError('');
+        const options = {
+          url: 'https://similar-web.p.rapidapi.com/get-analysis',
+          params: { domain: domainName.toLowerCase() },
+          headers: {
+            'X-RapidAPI-Key': rapidApiKey,
+            'X-RapidAPI-Host': 'similar-web.p.rapidapi.com',
+          },
+        };
+
+        try {
+          const data = await http.get(options.url, {
+            params: options.params,
+            headers: options.headers,
+          });
+          setApiData(data.data);
+          setIsLoading(false);
+          setError('');
+        } catch (error) {
+          const errorMessage =
+            error.response.data.message +
+            ' Check & Update SimilarWeb API Key at WP Admin Backend... ';
+
+          setError(errorMessage);
+        }
       } else {
-        console.log('Input is a number');
+        // console.log('Input is a number');
         //THIS MAKES API DATA DISAPPEAR AND ONLY NUMER DATA TO SHOW UP
         setIsNumber(true);
         //THIS DISABLES THE LOADING WHEN NUMBER IS INSERTED
@@ -65,7 +73,7 @@ const Header = ({
       }
     } else {
       setIsLoading(false);
-      setError('Input is requied!');
+      setError('Input is Required!');
     }
   };
 

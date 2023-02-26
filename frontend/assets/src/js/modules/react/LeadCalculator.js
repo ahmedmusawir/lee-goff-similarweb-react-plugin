@@ -19,7 +19,7 @@ function LeadCalculator() {
       );
     };
 
-    getKeys();
+    // getKeys();
   }, []);
 
   return (

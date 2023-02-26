@@ -23,9 +23,10 @@ add_action('admin_enqueue_scripts',
    */
 
   wp_localize_script(BACKEND_SCRIPT_ID, 'leeAdminData', array(
-   'root_url' => get_site_url(),
-   'ajax_url' => admin_url('admin-ajax.php'),
-   'nonce'    => wp_create_nonce('wp_rest')
+   'root_url'   => get_site_url(),
+   'plugin_url' => plugins_url(),
+   'ajax_url'   => admin_url('admin-ajax.php'),
+   'nonce'      => wp_create_nonce('wp_rest')
   ));
 
   if (is_admin()) {
