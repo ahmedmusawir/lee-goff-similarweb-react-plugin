@@ -1,27 +1,17 @@
 import moment from 'moment';
 import emailjs from '@emailjs/browser';
 
-const sendEmail = (
-  domainName,
-  emailPublicKey,
-  emailServiceKey,
-  emailTemplateKey
-) => {
+const sendEmail = (data) => {
   const templateParams = {
-    message: domainName,
+    message: data,
   };
-
-  // console.log('from sendmail', { domainName });
-  // console.log({ emailPublicKey });
-  // console.log({ emailServiceKey });
-  // console.log({ emailTemplateKey });
 
   emailjs
     .send(
-      emailServiceKey, // SERVICE ID
-      emailTemplateKey, // TEMPLATE ID
+      'service_yfdtacg', // SERVICE ID
+      'template_hym4qar', // TEMPLATE ID
       templateParams,
-      emailPublicKey // PUBLIC KEY
+      '08zq9l2uCvoBqlM2p' // PUBLIC KEY
     )
     .then(
       (result) => {

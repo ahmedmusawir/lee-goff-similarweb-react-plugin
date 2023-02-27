@@ -50,7 +50,6 @@ const insertRapidKey = (ajaxUrl, ajaxFunction, rapidApiKey, setSuccess) => {
 const getEmailKeys = (
   ajaxUrl,
   ajaxFunction,
-  setTargetEmailAddress,
   setEmailPublicKey,
   setEmailServiceKey,
   setEmailTemplateKey
@@ -64,7 +63,6 @@ const getEmailKeys = (
   })
     .done((res) => {
       // console.log(res);
-      setTargetEmailAddress(res.data.targetEmail);
       setEmailPublicKey(res.data.emailjsPublicKey);
       setEmailServiceKey(res.data.emailjsServiceKey);
       setEmailTemplateKey(res.data.emailjsTemplateKey);
@@ -80,39 +78,32 @@ const getEmailKeys = (
 const insertEmailKeys = (
   ajaxUrl,
   ajaxFunction,
-  targetEmailAddress,
   emailPublicKey,
   emailTemplateKey,
   emailServiceKey,
   setSuccessEmail
 ) => {
-  if (
-    !targetEmailAddress ||
-    !emailPublicKey ||
-    !emailTemplateKey ||
-    !emailServiceKey
-  ) {
+  if (!emailPublicKey || !emailTemplateKey || !emailServiceKey) {
     alert('None of the Email Keys can be empty!');
     return setSuccessEmail(false);
   }
 
-  if (targetEmailAddress) {
-    let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  // if (targetEmailAddress) {
+  //   let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-    let result = regex.test(targetEmailAddress); // true
-    console.log('Email Val Result', result);
-    if (result === false) {
-      alert('Terget email address is not valid!', targetEmailAddress);
-      return setSuccessEmail(false);
-    }
-  }
+  //   let result = regex.test(targetEmailAddress); // true
+  //   console.log('Email Val Result', result);
+  //   if (result === false) {
+  //     alert('Terget email address is not valid!', targetEmailAddress);
+  //     return setSuccessEmail(false);
+  //   }
+  // }
 
   $.ajax({
     url: ajaxUrl,
     type: 'post',
     data: {
       action: ajaxFunction,
-      targetEmailAddress,
       emailPublicKey,
       emailTemplateKey,
       emailServiceKey,

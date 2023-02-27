@@ -96,6 +96,9 @@
           h6 {
             color: #e7e7e7e7 !important;
             font-family: 'Poppins', sans-serif !important;
+            @media (min-width: 768px) and (max-width: 999px) {
+              font-size: 0.8rem;
+            }
           }
         }
         .number-box {
@@ -106,9 +109,15 @@
           .number {
             font-size: 3rem;
             color: white !important;
+            @media (min-width: 768px) and (max-width: 999px) {
+              font-size: 2rem;
+            }
           }
           .subtitle {
             color: white !important;
+            @media (min-width: 768px) and (max-width: 999px) {
+              font-size: 0.8rem;
+            }
           }
         }
       }
@@ -117,17 +126,28 @@
           .title {
             color: #e7e7e7 !important;
             font-family: 'Poppins', sans-serif !important;
+            @media (min-width: 768px) and (max-width: 999px) {
+              font-size: 0.8rem;
+            }
           }
         }
         .number-box {
           border-left: 1px solid white;
           margin-top: -1.5rem !important;
-          .number-sign {
-            font-size: 1.5rem;
+          // border: 5px dotted yellow;
+          @media (max-width: 767px) {
+            padding-bottom: 1.25rem;
+            border-left: 0px;
+            border-bottom: 1px solid #e3e3e3;
+            margin-bottom: 1rem;
           }
+
           .number {
             font-size: 2rem;
             color: white !important;
+            @media (min-width: 768px) and (max-width: 999px) {
+              font-size: 1.5rem;
+            }
           }
         }
       }

@@ -11,7 +11,6 @@ axios.interceptors.response.use(null, (error) => {
     alert('An unexpected error occured');
   }
 
-  // console.log('Axios Error:', error.response.data.message);
   return Promise.reject(error);
 });
 

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Audio from 'react-loader-spinner';
 import Modal from 'react-modal';
-import $ from 'jquery';
 import {
   getRapidKey,
   getEmailKeys,
@@ -33,7 +32,6 @@ function LeadCalculatorAdmin() {
     leeAdminData.plugin_url +
     '/lee-goff-similarweb-react-plugin/admin/assets/imgs';
   const [rapidApiKey, setRapidApiKey] = useState('');
-  const [targetEmailAddress, setTargetEmailAddress] = useState('');
   const [emailPublicKey, setEmailPublicKey] = useState('');
   const [emailTemplateKey, setEmailTemplateKey] = useState('');
   const [emailServiceKey, setEmailServiceKey] = useState('');
@@ -82,7 +80,6 @@ function LeadCalculatorAdmin() {
     getEmailKeys(
       leeAdminData.ajax_url,
       ajaxEmailGetFunction,
-      setTargetEmailAddress,
       setEmailPublicKey,
       setEmailServiceKey,
       setEmailTemplateKey
@@ -241,17 +238,7 @@ function LeadCalculatorAdmin() {
           <h1>Email JS</h1>
           <img src={pluginImgUrl + '/emailjs-publickey.png'} alt="" />
         </Modal>
-        <label htmlFor="rapidapikey" className="text-warning">
-          Target Email:
-        </label>
-        <input
-          type="email"
-          required
-          placeholder={
-            targetEmailAddress ? targetEmailAddress : 'Target Email Address'
-          }
-          onChange={(e) => setTargetEmailAddress(e.target.value)}
-        />
+
         <label htmlFor="rapidapikey" className="text-warning">
           EmailJS Service ID:
         </label>
@@ -284,7 +271,6 @@ function LeadCalculatorAdmin() {
             insertEmailKeys(
               leeAdminData.ajax_url,
               ajaxEmailPostFunction,
-              targetEmailAddress,
               emailPublicKey,
               emailTemplateKey,
               emailServiceKey,

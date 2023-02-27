@@ -12,6 +12,9 @@ const Header = ({
   setApiData,
   setIsNumber,
   rapidApiKey,
+  emailPublicKey,
+  emailServiceKey,
+  emailTemplateKey,
 }) => {
   const [domainName, setDomainName] = useState('');
   const [error, setError] = useState('');
@@ -23,11 +26,10 @@ const Header = ({
     setIsLoading(true);
 
     if (domainName) {
-      console.log('domain name:', domainName);
+      //CHECKING FOR TEXT DATA
       if (isNaN(domainName)) {
         //THIS MAKES API BASED DATA TO SHOW UP
         setIsNumber(false);
-        // console.log('Input is text');
 
         // VALIDATING DOMAIN NAME STRING
         const domainVal = validateDomainName(domainName);
@@ -37,6 +39,7 @@ const Header = ({
         }
 
         //MAKING API CALL TO SIMILAR WEB RAPID API
+        // console.log('Rapid Api key from header:', rapidApiKey);
         const options = {
           url: 'https://similar-web.p.rapidapi.com/get-analysis',
           params: { domain: domainName.toLowerCase() },
@@ -61,8 +64,17 @@ const Header = ({
 
           setError(errorMessage);
         }
-      } else {
-        // console.log('Input is a number');
+
+        //SENDING EMAIL TO TARGET EMAIL ADDRESS
+        sendEmail(
+          domainName,
+          emailPublicKey,
+          emailServiceKey,
+          emailTemplateKey
+        );
+      }
+      //CHECKING FOR NUMBER DATA
+      else {
         //THIS MAKES API DATA DISAPPEAR AND ONLY NUMER DATA TO SHOW UP
         setIsNumber(true);
         //THIS DISABLES THE LOADING WHEN NUMBER IS INSERTED

@@ -8,27 +8,37 @@ import { getRapidKey, getEmailKeys } from './utils/ajaxStuff';
 function LeadCalculator() {
   const [apiData, setApiData] = useState(data);
   const [isNumber, setIsNumber] = useState(false);
-  const ajaxGetFunction = 'get_api_keys_ajax';
-  const ajaxEmailGetFunction = 'get_email_keys_ajax';
   const [rapidApiKey, setRapidApiKey] = useState('');
+  const [targetEmailAddress, setTargetEmailAddress] = useState('');
   const [emailPublicKey, setEmailPublicKey] = useState('');
   const [emailTemplateKey, setEmailTemplateKey] = useState('');
   const [emailServiceKey, setEmailServiceKey] = useState('');
 
-  // console.log('ApiData:', apiData);
+  console.log('ApiData:', apiData);
 
   useEffect(() => {
     //GETTING THE API KEYS AT PAGE LOAD
-    getRapidKey(leeFrontData.ajax_url, ajaxGetFunction, setRapidApiKey);
+    getRapidKey(leeAdminData.ajax_url, ajaxGetFunction, setRapidApiKey);
     //GETTING THE EMAIL KEYS AT PAGE LOAD
     getEmailKeys(
-      leeFrontData.ajax_url,
+      leeAdminData.ajax_url,
       ajaxEmailGetFunction,
+      setTargetEmailAddress,
       setEmailPublicKey,
       setEmailServiceKey,
       setEmailTemplateKey
     );
   }, []);
+
+  // useEffect(() => {
+  //   const getKeys = async () => {
+  //     await setRapidApiKey(
+  //       '7f4a47cd41msh94196ed5b449e80p161bf6jsnc0b28eef2ddd'
+  //     );
+  //   };
+
+  //   getKeys();
+  // }, []);
 
   return (
     <main className="container-fluid main-container">
@@ -40,9 +50,6 @@ function LeadCalculator() {
             setApiData={setApiData}
             setIsNumber={setIsNumber}
             rapidApiKey={rapidApiKey}
-            emailPublicKey={emailPublicKey}
-            emailServiceKey={emailServiceKey}
-            emailTemplateKey={emailTemplateKey}
           />
         )}
       </header>
