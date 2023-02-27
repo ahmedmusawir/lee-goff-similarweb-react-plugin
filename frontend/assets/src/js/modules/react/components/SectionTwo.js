@@ -27,7 +27,7 @@ const SectionTwo = ({
 
   return (
     <>
-      <article className="text-content py-5 mx-5">
+      <article className="other-content container py-5">
         <h3>{siteName} Traffic and Engagement Analysis</h3>
         <p>
           <small>

@@ -129,9 +129,13 @@ function LeadCalculatorAdmin() {
           <h1>Rapid API</h1>
           <img src={pluginImgUrl + '/rapidapi.png'} alt="" />
         </Modal>
+        <label htmlFor="rapidapikey" className="text-warning">
+          API Key:
+        </label>
         <input
           type="text"
-          placeholder={'SimilarWeb Api Key'}
+          name="rapidapikey"
+          placeholder={rapidApiKey ? rapidApiKey : 'SimilarWeb Api Key'}
           onChange={(e) => setRapidApiKey(e.target.value)}
         />
 
@@ -237,25 +241,41 @@ function LeadCalculatorAdmin() {
           <h1>Email JS</h1>
           <img src={pluginImgUrl + '/emailjs-publickey.png'} alt="" />
         </Modal>
+        <label htmlFor="rapidapikey" className="text-warning">
+          Target Email:
+        </label>
         <input
           type="email"
           required
-          placeholder={'Target Email Address'}
+          placeholder={
+            targetEmailAddress ? targetEmailAddress : 'Target Email Address'
+          }
           onChange={(e) => setTargetEmailAddress(e.target.value)}
         />
+        <label htmlFor="rapidapikey" className="text-warning">
+          EmailJS Service ID:
+        </label>
         <input
           type="text"
-          placeholder={'EmailJs Service ID'}
+          placeholder={emailServiceKey ? emailServiceKey : 'EmailJs Service ID'}
           onChange={(e) => setEmailServiceKey(e.target.value)}
         />
+        <label htmlFor="rapidapikey" className="text-warning">
+          EmailJS Template ID:
+        </label>
         <input
           type="text"
-          placeholder={'EmailJS Template Key'}
+          placeholder={
+            emailTemplateKey ? emailTemplateKey : 'EmailJS Template Key'
+          }
           onChange={(e) => setEmailTemplateKey(e.target.value)}
         />
+        <label htmlFor="rapidapikey" className="text-warning">
+          EmailJS Public Key:
+        </label>
         <input
           type="text"
-          placeholder={'EmailJS Public Key'}
+          placeholder={emailPublicKey ? emailPublicKey : 'EmailJS Public Key'}
           onChange={(e) => setEmailPublicKey(e.target.value)}
         />
         <button
