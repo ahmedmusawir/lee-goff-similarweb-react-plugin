@@ -3,7 +3,7 @@
 Plugin Name: Traffic2Lead Calculator Plugin
 Plugin URI: https://cyberizegroup.com/
 Description: This plugin will help you plan how to convert your website traffic into profitable leads.
-Version: 2.0
+Version: 3.0.1
 Author: Cyberize Group Inc.
 Author URI: https://linkedin.com/ahmedmusawir
 License: GPLv2 or later
@@ -20,7 +20,7 @@ require 'plugin-update-checker/plugin-update-checker.php';
 use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
 $myUpdateChecker = PucFactory::buildUpdateChecker(
- 'https://github.com/ahmedmusawir/lee-goff-similarweb-react-plugin/',
+ 'https://github.com/ahmedmusawir/lee-goff-similarweb-react-plugin',
  __FILE__,
  'lee-goff-similarweb-react-plugin'
 );
