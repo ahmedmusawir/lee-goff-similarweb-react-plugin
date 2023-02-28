@@ -91,7 +91,7 @@ const Header = ({
 
   return (
     <div className="row">
-      <section className="col-md-8 mx-auto">
+      <section className="col-sm-12 col-md-9 mx-auto">
         <div className="row header-top-section mx-auto">
           <div className="col-sm-8 header-inputs">
             <input

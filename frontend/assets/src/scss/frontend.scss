@@ -25,18 +25,21 @@
         }
 
         .get-estimate-input {
-          color: white;
+          color: white !important;
           border-radius: 0 !important;
           height: 3rem;
           margin-right: -2rem !important;
           background-color: rgba($color: #000000, $alpha: 0);
+          border: 1px solid white !important;
+          font-family: 'Poppins', sans-serif !important;
+
           &:focus {
             border-color: dodgerblue !important;
           }
           &::placeholder {
             color: white;
-            @media (max-width: 930px) {
-              font-size: 0.8rem !important;
+            @media (min-width: 576px) and (max-width: 991px) {
+              font-size: 0.6rem !important;
             }
             @media (max-width: 410px) {
               font-size: 0.65rem !important;
@@ -52,6 +55,11 @@
           background-color: white;
           color: slategray;
           height: 3rem;
+          font-family: 'Poppins', sans-serif !important;
+
+          @media (min-width: 576px) and (max-width: 991px) {
+            font-size: 0.8rem !important;
+          }
         }
       }
       .header-bottom-section {
@@ -68,6 +76,14 @@
           h5 {
             font-family: 'Poppins', sans-serif !important;
             color: white !important;
+          }
+          @media (min-width: 576px) and (max-width: 999px) {
+            h2 {
+              font-size: 2rem;
+            }
+            h5 {
+              font-size: 0.8rem;
+            }
           }
         }
         .left-blue-box {
@@ -90,6 +106,13 @@
       h1 {
         font-family: 'Poppins', sans-serif !important;
         color: white !important;
+        @media (max-width: 450px) {
+          font-size: 1.5rem;
+          font-weight: bold;
+        }
+      }
+      .header-img {
+        margin: auto !important;
       }
       .section-1-row-2 {
         .title-box {
@@ -116,7 +139,7 @@
           .subtitle {
             color: white !important;
             @media (min-width: 768px) and (max-width: 999px) {
-              font-size: 0.8rem;
+              font-size: 0.6rem;
             }
           }
         }
@@ -156,6 +179,20 @@
     .section-2 {
       border: 5px solid #f26e21;
 
+      h3,
+      h5,
+      h6 {
+        color: gray !important;
+        font-family: 'Poppins', sans-serif !important;
+      }
+
+      h3 {
+        @media (max-width: 450px) {
+          font-size: 1.5rem;
+          font-weight: bold;
+        }
+      }
+
       .number-box {
         background-color: white;
         padding-top: 2rem;
@@ -164,7 +201,7 @@
       }
       .chart-box {
         text-align: center !important;
-        @media (max-width: 900px) {
+        @media (max-width: 991px) {
           margin-bottom: 3rem;
           margin-top: 4rem;
         }
