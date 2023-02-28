@@ -15,8 +15,13 @@ if (!defined('WPINC')) {
  die;
 }
 
+// THE FOLLOWING VARIABLE NEEDS TO BE CHANGED TO SOMETHIGN UNIQUE FOR EACH PLUGIN
+define('LEE_GOFF_REACT_PLUGIN_URL', plugin_dir_url(__FILE__));
+
 // PLUGIN UPDATE CHECKER
-require 'plugin-update-checker/plugin-update-checker.php';
+// require 'plugin-update-checker/plugin-update-checker.php';
+include plugin_dir_path(__FILE__) . 'plugin-update-checker/plugin-update-checker.php';
+
 use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
 $myUpdateChecker = PucFactory::buildUpdateChecker(
@@ -30,9 +35,6 @@ $myUpdateChecker->setBranch('main');
 
 //Optional: If you're using a private repository, specify the access token like this:
 // $myUpdateChecker->setAuthentication('your-token-here');
-
-// THE FOLLOWING VARIABLE NEEDS TO BE CHANGED TO SOMETHIGN UNIQUE FOR EACH PLUGIN
-define('LEE_GOFF_REACT_PLUGIN_URL', plugin_dir_url(__FILE__));
 
 /**
  * ALL CSS AND JS SCRIPTS
